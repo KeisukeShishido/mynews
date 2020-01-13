@@ -8,6 +8,13 @@ use App\Profile;
 
 class ProfileController extends Controller
 {
+    public function index(Request $request)
+    {
+        $profiles = Profile::all();
+
+        return view('admin.profile.index', ['profiles' => $profiles]);
+    }
+
     public function add()
     {
         return view('admin.profile.create');
@@ -30,14 +37,38 @@ class ProfileController extends Controller
       return redirect('admin/profile/create');
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
-        return view('admin.profile.edit');
+        $profile = Profile::find($request->id);
+        if (empty($profile)) {
+          abort(404);    
+        }
+        return view('admin.profile.edit', ['profile_form' => $profile]);
     }
+  
+  
+    public function update(Request $request)
+    {
+        // Validationをかける
+        $this->validate($request, Profile::$rules);
 
-    public function update()
-    {
-        return redirect('admin/profile/edit');
+        $profile = Profile::find($request->id);
+        $profile_form = $request->all();
+
+        $profile_form = $request->all();
+        unset($profile_form['_token']);
+  
+        // 該当するデータを上書きして保存する
+        $profile->fill($profile_form)->save();
+  
+        return redirect('admin/profiles');
     }
+    public function delete(Request $request)
+    {
+        $profile = Profile::find($request->id);
+        // 削除する
+        $profile->delete();
+        return redirect('admin/profiles/');
+    }  
 
 }
