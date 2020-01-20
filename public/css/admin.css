@@ -23,6 +23,7 @@ body {
 }
 
 .list-group-item {
+  letter-spacing: 1.2px;
   border-color: #fff;
   background-color: #000;
 }

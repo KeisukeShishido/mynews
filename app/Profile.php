@@ -12,4 +12,9 @@ class Profile extends Model
         'name' => 'required',
         'gender' => 'required',
     );
+
+    public function histories()
+    {
+      return $this->hasMany('App\ProfileHistory');
+    }
 }

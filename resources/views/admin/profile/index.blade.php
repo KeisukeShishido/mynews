@@ -19,7 +19,8 @@
                             <tr>
                                 <th width="5%">ID</th>
                                 <th width="10%">名前</th>
-                                <th width="15%">趣味</th>
+                                <th width="10%">趣味</th>
+                                <th width="5%">性別</th>
                                 <th width="50%">自己紹介</th>
                                 <th width="20%">操作</th>
                             </tr>
@@ -30,6 +31,7 @@
                                     <td>{{ $profile->id }}</td>
                                     <td>{{ \Str::limit($profile->name, 100) }}</td>
                                     <td>{{ \Str::limit($profile->hobby, 100) }}</td>
+                                    <td>{{ \Str::limit($profile->gender, 100) }}</td>
                                     <td>{{ \Str::limit($profile->introduction, 100) }}</td>
                                     <td style="display:table; margin:10px;">
                                         <div style="display:table-cell;">
