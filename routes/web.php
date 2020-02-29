@@ -11,9 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'NewsController@index');
+Route::get('/profile', 'ProfileController@index');
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('news/create', 'Admin\NewsController@add');
     Route::post('news/create', 'Admin\NewsController@create');
@@ -31,7 +35,3 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('profiles/edit', 'Admin\ProfileController@update');
     Route::delete('profiles/delete', 'Admin\ProfileController@delete');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
